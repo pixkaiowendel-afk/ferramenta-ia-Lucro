@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    function incoming() {
+      return request.resource.data;
+    }
+    function existing() {
+      return resource.data;
+    }
+
+    match /sites/{siteId} {
+      allow read: if true;
+      allow create, update: if isValidId(siteId) && incoming().id == siteId;
+      allow delete: if isValidId(siteId);
+    }
+
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create, update: if isValidId(orderId) && incoming().id == orderId;
+      allow delete: if isValidId(orderId);
+    }
+
+    match /customers/{customerId} {
+      allow read: if true;
+      allow create, update: if isValidId(customerId) && incoming().id == customerId;
+      allow delete: if isValidId(customerId);
+    }
+
+    match /app_users/{userId} {
+      allow read: if true;
+      allow create, update: if isValidId(userId) && incoming().id == userId;
+      allow delete: if isValidId(userId);
+    }
+
+    match /subscriptions/{subId} {
+      allow read: if true;
+      allow create, update: if isValidId(subId) && incoming().id == subId;
+      allow delete: if isValidId(subId);
+    }
+
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "Site": {
+      "title": "Site",
+      "description": "Represents a business website created by the user with AI generator or manual configuration.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique site ID" },
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "companyName": { "type": "string", "description": "Company name" },
+        "niche": { "type": "string", "description": "Business niche or industry" },
+        "slogan": { "type": "string", "description": "Company slogan or tagline" },
+        "phone": { "type": "string", "description": "Contact phone or WhatsApp" },
+        "email": { "type": "string", "description": "Contact email" },
+        "address": { "type": "string", "description": "Physical business address" },
+        "description": { "type": "string", "description": "Detailed business description" },
+        "primaryColor": { "type": "string", "description": "Primary brand color hex code" },
+        "theme": { "type": "string", "description": "UI Theme (modern, dark, elegant, playful, minimal, brutalist)" },
+        "sections": { "type": "object", "description": "Site section visibility flags" },
+        "products": { "type": "array", "description": "List of products or services offered" },
+        "domain": { "type": "string", "description": "Custom or default domain" },
+        "subdomain": { "type": "string", "description": "Subdomain slug" },
+        "customCss": { "type": "string", "description": "Custom CSS styling" },
+        "createdAt": { "type": "string", "description": "Creation ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "Update ISO timestamp" }
+      },
+      "required": ["id", "companyName", "niche", "primaryColor", "theme"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order made on one of the created websites.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique order ID" },
+        "siteId": { "type": "string", "description": "Target site ID" },
+        "siteName": { "type": "string", "description": "Target site company name" },
+        "customerName": { "type": "string", "description": "Customer full name" },
+        "customerEmail": { "type": "string", "description": "Customer email" },
+        "customerPhone": { "type": "string", "description": "Customer phone" },
+        "customerAddress": { "type": "string", "description": "Customer physical address" },
+        "customerLocation": { "type": "object", "description": "Latitude and longitude coordinates" },
+        "items": { "type": "array", "description": "List of ordered items" },
+        "totalAmount": { "type": "number", "description": "Total amount in BRL (R$)" },
+        "paymentMethod": { "type": "string", "description": "Payment method (pix, cartao, boleto)" },
+        "status": { "type": "string", "description": "Order status (pago, pendente, cancelado)" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "siteId", "customerName", "totalAmount", "paymentMethod", "status", "createdAt"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer or prospective lead with geographic coordinates for Google Maps search.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Customer unique identifier" },
+        "name": { "type": "string", "description": "Customer contact or company name" },
+        "email": { "type": "string", "description": "Customer email" },
+        "phone": { "type": "string", "description": "Customer phone or WhatsApp" },
+        "address": { "type": "string", "description": "Customer street address" },
+        "city": { "type": "string", "description": "City name" },
+        "state": { "type": "string", "description": "State or region code" },
+        "location": { "type": "object", "description": "Lat and Lng geographic coordinate pair" },
+        "niche": { "type": "string", "description": "Customer business category or tag" },
+        "notes": { "type": "string", "description": "CRM notes or meeting summary" },
+        "totalSpent": { "type": "number", "description": "Lifetime amount spent in BRL" },
+        "ordersCount": { "type": "number", "description": "Number of purchases made" },
+        "siteId": { "type": "string", "description": "Associated site ID if any" },
+        "createdAt": { "type": "string", "description": "Creation ISO date" },
+        "updatedAt": { "type": "string", "description": "Last update ISO date" }
+      },
+      "required": ["id", "name", "address", "location"]
+    },
+    "AppUser": {
+      "title": "AppUser",
+      "description": "User accounts with login credentials and subscription plans for the tool.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique user ID" },
+        "name": { "type": "string", "description": "User full name" },
+        "email": { "type": "string", "description": "User login email" },
+        "password": { "type": "string", "description": "User access password" },
+        "role": { "type": "string", "description": "Role: admin or member" },
+        "plan": { "type": "string", "description": "Assigned plan ID" },
+        "planName": { "type": "string", "description": "Plan display name" },
+        "planPrice": { "type": "number", "description": "Price paid for the plan" },
+        "daysTotal": { "type": "number", "description": "Total access days" },
+        "isLifetime": { "type": "boolean", "description": "Whether user has lifetime access" },
+        "status": { "type": "string", "description": "Account status: active, expired, blocked" },
+        "createdAt": { "type": "string", "description": "Creation date" },
+        "expiresAt": { "type": "string", "description": "Expiration ISO timestamp" }
+      },
+      "required": ["id", "email", "password", "role", "plan", "status", "createdAt"]
+    },
+    "SubscriptionPurchase": {
+      "title": "SubscriptionPurchase",
+      "description": "Subscription payments made to access the tool.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Transaction ID" },
+        "userName": { "type": "string", "description": "Buyer full name" },
+        "userEmail": { "type": "string", "description": "Buyer email" },
+        "userPhone": { "type": "string", "description": "Buyer phone" },
+        "planId": { "type": "string", "description": "Plan key" },
+        "planName": { "type": "string", "description": "Plan title" },
+        "amount": { "type": "number", "description": "Price paid in BRL" },
+        "paymentMethod": { "type": "string", "description": "Payment method (pix, cartao)" },
+        "status": { "type": "string", "description": "Status (pago, pendente)" },
+        "daysDuration": { "type": "number", "description": "Access duration in days" },
+        "isLifetime": { "type": "boolean", "description": "If lifetime plan" },
+        "createdAt": { "type": "string", "description": "Purchase timestamp" }
+      },
+      "required": ["id", "userEmail", "planId", "amount", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/sites/{siteId}": {
+      "schema": { "$ref": "#/entities/Site" },
+      "description": "Stores created business websites"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Stores store orders and checkout transactions"
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Stores customer leads and client profiles mapped on Google Maps"
+    },
+    "/app_users/{userId}": {
+      "schema": { "$ref": "#/entities/AppUser" },
+      "description": "Stores user accounts and subscription days"
+    },
+    "/subscriptions/{subId}": {
+      "schema": { "$ref": "#/entities/SubscriptionPurchase" },
+      "description": "Stores tool subscription purchases and notifications for admin"
+    }
+  }
+}

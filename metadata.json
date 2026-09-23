@@ -1,0 +1,6 @@
+{
+  "name": "Criador de Sites com IA & Painel de Vendas",
+  "description": "Crie sites profissionais para empresas em 4 passos com Inteligência Artificial, gerador de catálogo e acompanhamento em tempo real do saldo de vendas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
